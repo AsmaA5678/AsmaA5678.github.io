@@ -44,8 +44,12 @@
     const cats = document.querySelectorAll('.cat');
 
     function placeCatRandomly(cat) {
-      const x = Math.random() * (window.innerWidth - cat.width);
-      const y = Math.random() * (window.innerHeight - cat.height);
+      // Use the clientWidth and clientHeight to get the actual dimensions
+      const catWidth = cat.clientWidth;
+      const catHeight = cat.clientHeight;
+
+      const x = Math.random() * (window.innerWidth - catWidth);
+      const y = Math.random() * (window.innerHeight - catHeight);
       cat.style.transform = `translate(${x}px, ${y}px)`;
     }
 
