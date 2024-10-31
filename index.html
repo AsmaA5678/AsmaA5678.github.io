@@ -42,17 +42,18 @@
 
   <script>
     const cats = document.querySelectorAll('.cat');
-    const distance = 100; 
+    const distance = 40; // Distance between cats
 
     function isColliding(cat, x, y) {
       const catRect = cat.getBoundingClientRect();
       return Array.from(cats).some(otherCat => {
-        if (otherCat === cat) return false; 
+        if (otherCat === cat) return false; // Skip the same cat
         const otherCatRect = otherCat.getBoundingClientRect();
-        return !(x + catRect.width < otherCatRect.left ||
-                 x > otherCatRect.left + otherCatRect.width ||
-                 y + catRect.height < otherCatRect.top ||
-                 y > otherCatRect.top + otherCatRect.height);
+        // Check if the distance is less than the specified distance
+        return !(x + catRect.width < otherCatRect.left + distance ||
+                 x > otherCatRect.left + otherCatRect.width - distance ||
+                 y + catRect.height < otherCatRect.top + distance ||
+                 y > otherCatRect.top + otherCatRect.height - distance);
       });
     }
 
@@ -64,7 +65,7 @@
       do {
         x = Math.random() * (window.innerWidth - catWidth);
         y = Math.random() * (window.innerHeight - catHeight);
-      } while (isColliding(cat, x + distance, y + distance)); 
+      } while (isColliding(cat, x, y)); // Check for collisions
 
       cat.style.transform = `translate(${x}px, ${y}px)`;
     }
