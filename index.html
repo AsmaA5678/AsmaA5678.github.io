@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Cat Position</title>
+  <style>
+    body {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      background-color: #f0f0f0; 
+    }
+    img {
+      position: absolute;
+      transition: transform 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://github.com/user-attachments/assets/7d018080-26b0-4509-9414-2e4d5107f404" alt="Random Cat" id="cat" width="100">
+
+  <script>
+    function placeCatRandomly() {
+      const cat = document.getElementById('cat');
+      const x = Math.random() * (window.innerWidth - cat.width);
+      const y = Math.random() * (window.innerHeight - cat.height);
+      cat.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    window.onload = placeCatRandomly;
+
+    window.onclick = placeCatRandomly;
+  </script>
+</body>
+</html>
