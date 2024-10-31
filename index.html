@@ -42,14 +42,30 @@
 
   <script>
     const cats = document.querySelectorAll('.cat');
+    const distance = 20; // Distance between cats
+
+    function isColliding(cat, x, y) {
+      const catRect = cat.getBoundingClientRect();
+      return Array.from(cats).some(otherCat => {
+        if (otherCat === cat) return false; // Skip the same cat
+        const otherCatRect = otherCat.getBoundingClientRect();
+        return !(x + catRect.width < otherCatRect.left ||
+                 x > otherCatRect.left + otherCatRect.width ||
+                 y + catRect.height < otherCatRect.top ||
+                 y > otherCatRect.top + otherCatRect.height);
+      });
+    }
 
     function placeCatRandomly(cat) {
-      // Use the clientWidth and clientHeight to get the actual dimensions
       const catWidth = cat.clientWidth;
       const catHeight = cat.clientHeight;
+      let x, y;
 
-      const x = Math.random() * (window.innerWidth - catWidth);
-      const y = Math.random() * (window.innerHeight - catHeight);
+      do {
+        x = Math.random() * (window.innerWidth - catWidth);
+        y = Math.random() * (window.innerHeight - catHeight);
+      } while (isColliding(cat, x + distance, y + distance)); // Check for collisions
+
       cat.style.transform = `translate(${x}px, ${y}px)`;
     }
 
