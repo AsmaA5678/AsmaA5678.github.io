@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Cat Position</title>
+  <title>Random Cat Positions</title>
   <style>
     body {
       position: relative;
@@ -16,23 +16,34 @@
     img {
       position: absolute;
       transition: transform 0.5s;
-    }
+      width: 100px;
   </style>
 </head>
 <body>
-  <img src="https://github.com/user-attachments/assets/7d018080-26b0-4509-9414-2e4d5107f404" alt="Random Cat" id="cat" width="100">
+  <img src="https://github.com/user-attachments/assets/7d018080-26b0-4509-9414-2e4d5107f404" alt="Random Cat 1" class="cat">
+  <img src="https://github.com/user-attachments/assets/eb48b41c-c332-4a1b-9f7d-a8a2d1ef45ec" alt="Random Cat 2" class="cat">
+  <img src="https://github.com/user-attachments/assets/00ae38ea-9ae3-4c0c-9eca-73f6f478f453" alt="Random Cat 3" class="cat">
+  <img src="https://github.com/user-attachments/assets/8cbe4d32-3ad7-4b4b-acda-4556c7c6e48e" alt="Random Cat 4" class="cat">
+  <img src="https://github.com/user-attachments/assets/f18cc3cb-bd5b-41d4-94fb-464ea68534dc" alt="Random Cat 4" class="cat">
+  <img src="https://github.com/user-attachments/assets/1c16ec2a-7fdf-4f90-9a66-64f4c00f4037" alt="Random Cat 4" class="cat">
+  <img src="https://github.com/user-attachments/assets/0c679f50-002b-483e-b566-48f53ac79c08" alt="Random Cat 4" class="cat">
 
   <script>
-    function placeCatRandomly() {
-      const cat = document.getElementById('cat');
+    const cats = document.querySelectorAll('.cat');
+
+    function placeCatRandomly(cat) {
       const x = Math.random() * (window.innerWidth - cat.width);
       const y = Math.random() * (window.innerHeight - cat.height);
       cat.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    window.onload = placeCatRandomly;
+    function placeAllCatsRandomly() {
+      cats.forEach(cat => placeCatRandomly(cat));
+    }
 
-    window.onclick = placeCatRandomly;
+    window.onload = placeAllCatsRandomly;
+
+    window.onclick = placeAllCatsRandomly;
   </script>
 </body>
 </html>
